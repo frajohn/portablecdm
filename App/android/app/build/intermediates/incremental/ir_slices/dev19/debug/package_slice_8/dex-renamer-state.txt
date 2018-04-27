@@ -1,4 +1,0 @@
-#Fri Apr 27 14:55:02 CEST 2018
-base.0=/Users/niklaswesterberg/dat255/portablecdm/App/android/app/build/intermediates/transforms/dexMerger/dev19/debug/9
-path.0=classes.dex
-renamed.0=classes.dex
