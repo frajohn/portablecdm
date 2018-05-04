@@ -3,6 +3,7 @@
 buildscript {
   repositories {
     jcenter()
+      google()
   }
   dependencies {
     classpath 'com.android.tools.build:gradle:3.0.1'
@@ -37,6 +38,7 @@ allprojects {
 
     // Want this last so that we never end up with a stale cache
     mavenLocal()
+      google()
   }
 }
 
