@@ -53,6 +53,7 @@ class SideMenu extends Component {
     const containerStyle = haveSelectedPortCall ? styles.menuContainer : [styles.menuContainer, styles.unavailableContainer];
     const textStyle = haveSelectedPortCall && activeItemKey !== 'Login' ? styles.menuText : [styles.menuText, styles.unavailableMenuText];
     const canBeAccessedEverywhereExceptOnLogin = activeItemKey === 'Login' ? [styles.menuText, styles.unavailableMenuText] : styles.menuText;
+
     return(
         <ScrollView style={styles.container}>    
             <View style={styles.headerContainer}>
@@ -82,7 +83,7 @@ class SideMenu extends Component {
                         containerStyle={activeItemKey === 'PortCalls' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
                         leftIcon={{
                           name:'home',
-                          color: 'white',
+                          color: 'red',
                           }}
                         hideChevron
                         underlayColor={colorScheme.secondaryColor}

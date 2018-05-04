@@ -14,6 +14,7 @@ export const selectVessel = (vessel) => {
  * 
  * @param {string} vesselUrn 
  */
+
 export const fetchVessel = (vesselUrn) => {
     return (dispatch, getState) => {
     
@@ -38,6 +39,7 @@ export const fetchVessel = (vesselUrn) => {
                 });
                 throw new Error('dispatched');
             }
+            
 
             let err = checkResponse(result);
             if(!err)

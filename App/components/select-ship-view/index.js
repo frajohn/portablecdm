@@ -31,8 +31,10 @@ import colorScheme from '../../config/colors';
 import TopHeader from '../top-header-view';
 import { getDateTimeString } from '../../util/timeservices';
 
-//var switcher =0;
-//var errormessage ="Choose boat"
+var switcher =0;
+
+
+
 
 class PortCallList extends Component {
     state = {
@@ -41,6 +43,10 @@ class PortCallList extends Component {
         numLoadedPortCalls: 20,
     }
     
+    loadVessels()
+    {
+
+    }
 
 
 
@@ -94,9 +100,11 @@ class PortCallList extends Component {
         if (portCalls.length === 1) {
             portCalls.splice(0,1);
         }
+
+
         return(
             <View style={styles.container}>
-                <TopHeader title= "Portcalls" navigation={this.props.navigation} firstPage/>
+                <TopHeader title= "Select Vessel" navigation={this.props.navigation} firstPage/>
                 {/*Render the search/filters header*/}
                 <View style={styles.containerRow}>
                     <SearchBar
@@ -154,10 +162,16 @@ class PortCallList extends Component {
                                     // rightTitleStyle={[styles.subTitleStyle, {fontSize: 9}]}
                                     onPress={() => {
                                         //console.log(JSON.stringify(portCall.vessel));
-
-                                        //selectPortCall(portCall);
-                                        //navigate('TimeLine')
- 
+                                        
+                                        if(switcher==0)
+                                        {
+                                        switcher=1;
+                                        errormessage="Du kan enbart välja båt en gång";
+                                        
+                                        selectPortCall(portCall);
+                                        navigate('TimeLine')
+                                        
+                                        }
                                     }}
 
                                     onLongPress={() => {
