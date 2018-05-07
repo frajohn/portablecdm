@@ -182,3 +182,16 @@ export const appendVesselToPortCall = (portCall) =>  {
         });
     }
 }
+
+export const updateShips = () => {
+    return (dispatch, getState) => {
+        const { portCalls: cache, lastUpdated } = getState().cache;
+
+        // Maybe TODO: Instead use after/before when updating on filter Arrival_Date
+        let updatedAfter = 'updated_after=' + new Date(lastUpdated).toISOString();
+
+
+        return dispatch(fetchVessel(updatedAfter)).then(() => 
+            dispatch(updateFetchedPortCalls(cache, getState().vessel.vesselName)));
+    };
+}

@@ -22,12 +22,14 @@ import BerthList            from '../components/berth-list-view';
 import BerthTimeLine        from '../components/berth-timeline-view';
 import ShipSelector         from '../components/select-ship-view';
 
+
 const BerthViewNavigator = StackNavigator({
     BerthList: { screen: BearthList }, // THIS SHOULD BE FIRST!!
     BerthTimeLine: { screen: BerthTimeLine },
 }, {
     headerMode: 'none'
 });
+
 
 const TimeLineNavigator = StackNavigator({
   TimeLineDetails: {screen: TimeLineView},
@@ -69,6 +71,13 @@ const InitiatePortCallNavigator = StackNavigator({
     headerMode: 'none'
 });
 
+const VesselListNavigator = StackNavigator({
+    ShipSelector: { screen: VesselLists},
+    FilterMenu: {screen: FilterMenu},
+  }, {
+    headerMode: 'none',
+  });
+
 const MainNavigator = DrawerNavigator({
     ShipSelector: { screen: ShipSelectorNavigator},
     PortCalls: { screen: PortCallListNavigator }, // THIS SHOULD BE FIRST!!
@@ -79,6 +88,7 @@ const MainNavigator = DrawerNavigator({
     VesselInfo: { screen: VesselInfo },
     Settings: { screen: SettingsNavigator },
     About: { screen: AboutView },
+    VesselList:{screen: VesselLists},
     Error: { screen: ErrorView },
 }, {
     headerMode: 'none',

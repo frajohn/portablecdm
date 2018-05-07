@@ -87,6 +87,8 @@ class SendPortcall extends Component {
     const { portCallId } = portCall;
     const { atLocation, fromLocation, toLocation, } = sendingState;
     const state = getState(stateId);
+    const{switcher}=true;
+
 
     if (!atLocation && state.ServiceType !== 'NAUTICAL') {
         Alert.alert('Invalid location', 'At-location is missing!');
@@ -168,7 +170,7 @@ class SendPortcall extends Component {
     const vesselId = selectedVessel.imo;
     const { atLocation, fromLocation, toLocation, } = sendingState;
     const state = getState(stateId);
-
+    const{switcher}=true;
     console.log('Selected vessel: ' + JSON.stringify(selectedVessel));
 
     if (!atLocation && state.ServiceType !== 'NAUTICAL') {

@@ -40,10 +40,9 @@ class PortCallList extends Component {
         refreshing: false,
         numLoadedPortCalls: 20,
     }
-    
+  
 
-
-
+ 
     componentWillMount() {
         this.loadPortCalls = this.loadPortCalls.bind(this);
         this._appendPortCalls = this._appendPortCalls.bind(this);
@@ -52,12 +51,15 @@ class PortCallList extends Component {
     }
 
     loadPortCalls() {
-        return this.props.updatePortCalls().then(() => {
+    
+            return this.props.updatePortCalls().then(() => {
             if(this.props.error.hasError) {
                 navigate('Error');
             }
         });
     }
+
+    
 
     _appendPortCalls() {
         let { portCalls, appendPortCalls, isAppendingPortCalls } = this.props;
@@ -83,23 +85,25 @@ class PortCallList extends Component {
     }
     
     render() {
-        const {navigation, showLoadingIcon, portCalls, selectPortCall} = this.props;
+        const {navigation, showLoadingIcon, portCalls, selectPortCall, vessel} = this.props;
         const {navigate} = navigation;
         const {searchTerm} = this.state;
      
        
-     
-
         // Quick fix for having 1 element with null value
         if (portCalls.length === 1) {
-            portCalls.splice(0,1);
+            portCalls.splice(0,1); 
         }
+        
+
         return(
             <View style={styles.container}>
-                <TopHeader title= "Portcalls" navigation={this.props.navigation} firstPage/>
+                <TopHeader title= {vessel.name.toString()+"'s portcalls"} navigation={this.props.navigation} firstPage/>
                 {/*Render the search/filters header*/}
                 <View style={styles.containerRow}>
-                    <SearchBar
+                   
+                   
+                  {/*   <SearchBar
                         autoCorrect={false}
                         containerStyle = {styles.searchBarContainer}
                         showLoadingIcon={showLoadingIcon}
@@ -110,7 +114,9 @@ class PortCallList extends Component {
                         placeholderTextColor = {colorScheme.tertiaryTextColor}
                         onChangeText={text => this.setState({searchTerm: text})}
                         textInputRef='textInput'
-                    />
+                    /> */}
+
+                    
                     <Button
                         containerViewStyle={styles.buttonContainer}
                         small
@@ -137,9 +143,11 @@ class PortCallList extends Component {
                     scrollEventThrottle={4}
                     >
 
+                    
+
                     <List>
                         {
-
+                           // this.filterships(portCalls, searchTerm).map(portCalls)=>(
                             this.search(portCalls, searchTerm).map( (portCall) => (
                                 <ListItem
                                     roundAvatar
@@ -155,9 +163,10 @@ class PortCallList extends Component {
                                     onPress={() => {
                                         //console.log(JSON.stringify(portCall.vessel));
 
-                                        //selectPortCall(portCall);
-                                        //navigate('TimeLine')
+                                        selectPortCall(portCall);
+                                        navigate('TimeLine')
  
+
                                     }}
 
                                     onLongPress={() => {
@@ -189,7 +198,7 @@ class PortCallList extends Component {
                     </List>
                 </ScrollView>
             </View>
-        );
+        )
     }
 
     renderFavorites(portCall) {
@@ -237,16 +246,38 @@ class PortCallList extends Component {
         return 0;
     }
 
+   /* filterships(portCalls,searchTerm)
+    {
+        let { filters } = this.props;
+        this.search(portCalls, searchTerm).map( (portCall) => (
+            return portCalls.filter(portCall => {
+                return (portCall.vessel.name.toUpperCase().includes(searchTerm.toUpperCase()) ||
+                portCall.vessel.imo.split('IMO:')[1].startsWith(searchTerm) ||
+                portCall.vessel.mmsi.split('MMSI:')[1].startsWith(searchTerm)) &&
+                (!portCall.stage || filters.stages.includes(portCall.stage));
+            }).sort((a,b) => this.sortFilters(a,b))//.sort((a,b) => a.status !== 'OK' ? -1 : 1)
+            .slice(0, this.state.numLoadedPortCalls);
+
+    }    */
+    
+    
+
+
+
+
     search(portCalls, searchTerm) {
         let { filters } = this.props;
+        searchTerm = this.props.vessel.name;
+   
 
-        return portCalls.filter(portCall => {
+       return portCalls.filter(portCall => {
             return (portCall.vessel.name.toUpperCase().includes(searchTerm.toUpperCase()) ||
             portCall.vessel.imo.split('IMO:')[1].startsWith(searchTerm) ||
             portCall.vessel.mmsi.split('MMSI:')[1].startsWith(searchTerm)) &&
             (!portCall.stage || filters.stages.includes(portCall.stage));
         }).sort((a,b) => this.sortFilters(a,b))//.sort((a,b) => a.status !== 'OK' ? -1 : 1)
         .slice(0, this.state.numLoadedPortCalls);
+    
     }
 }
 
@@ -297,7 +328,8 @@ function mapStateToProps(state) {
         showLoadingIcon: state.portCalls.portCallsAreLoading,
         filters: state.filters,
         error: state.error,
-        isAppendingPortCalls: state.cache.appendingPortCalls
+        isAppendingPortCalls: state.cache.appendingPortCalls,
+        vessel: state.portCalls.vessel,
     }
 }
 

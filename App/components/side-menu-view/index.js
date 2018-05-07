@@ -83,19 +83,23 @@ class SideMenu extends Component {
                         containerStyle={activeItemKey === 'PortCalls' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
                         leftIcon={{
                           name:'home',
-                          color: 'red',
+                          color: 'white',
                           }}
                         hideChevron
                         underlayColor={colorScheme.secondaryColor}
                         title={
                             <View style={styles.textContainer}>
-                                <Text style={canBeAccessedEverywhereExceptOnLogin}>Select PortCall</Text>     
+                                <Text style={canBeAccessedEverywhereExceptOnLogin}>Show Portcalls</Text>     
                             </View>
                         }
                         onPress={() => {
                             if(activeItemKey !== 'Login') navigate('PortCalls')}
                         }
                     />
+
+
+
+
 
                     <ListItem
                         containerStyle={activeItemKey === 'Berths' ? [styles.menuContainer, styles.selectedContainer] : styles.menuContainer}
@@ -249,6 +253,10 @@ class SideMenu extends Component {
                             }
                         }
                     />
+
+
+
+                    
                 </List>
             </View>
 
@@ -257,6 +265,7 @@ class SideMenu extends Component {
     );
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
