@@ -2,14 +2,29 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import {
+  AppRegistry,
   View,
   StyleSheet,
   Image,
   Dimensions,
+  ScrollView,
+  RefreshControl,
+  Alert,
+  TextInput,
+
 } from 'react-native';
+
+
+
 
 import {
   Text,
+  Button,
+  Icon,
+  FormLabel,
+  FormInput,
+  SearchBar,
+
 } from 'react-native-elements';
 import TopHeader from '../top-header-view';
 import colorScheme from '../../config/colors';
@@ -20,12 +35,20 @@ import {
 
 import ships from '../../assets/ships';
 
+var additionalText ='No additional information about the vessel has been submitted';
+
+
+
+
 class VesselInfo extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             extraInfo: undefined,
+            comment: '',
+            message: '',
+            promptVisible: false,
         };
     }
 
@@ -44,10 +67,23 @@ class VesselInfo extends Component {
     const { selectedPortCall, activeItemKey } = this.props;
     const vessel = this.props.extendedVessel ? this.props.extendedVessel : this.props.vessel;
 
+
     return(
+                
+      
+      
+      
 
       <View style={styles.container}>  
+
+
+
+      
         <TopHeader title = 'Vessel Info' firstPage navigation={this.props.navigation} rightIconFunction={this.goToStateList}/>
+
+        <ScrollView >
+
+
 
         <View style={styles.pictureContainer}>
           <Image
@@ -60,11 +96,20 @@ class VesselInfo extends Component {
             />
         </View>
 
+
+
         <View style={styles.headerContainer}>
-          <Text style={styles.headerText}>{vessel.name}</Text>
+          <Text style={styles.headerText}>{vessel.name.toString().toUpperCase()}</Text>
         </View>
 
+
+
+      
+
+
         <View style={styles.infoContainer}>
+          <Text style={styles.titleText}>BASIC VESSEL INFORMATION </Text>
+          
           {!!vessel.vesselType &&
           <Text style={styles.infoText}><Text style={{fontWeight: 'bold'}}>Vessel Type:  </Text>{vessel.vesselType.replace(/_/g, ' ')}</Text> 
           }
@@ -84,10 +129,94 @@ class VesselInfo extends Component {
             <Text style={styles.infoText}><Text style={{fontWeight: 'bold'}}>Beam: </Text>{extraInfo.beam}m</Text>
           }
         </View>
+
+
+
+
+
+          
+
+        <View style={styles.infoContainer}>
+          <Text style={styles.titleText}> ADDITIONAL VESSEL INFORMATION </Text>
+          
+          <Text style={styles.infoText}>> {additionalText.toString()}</Text>
+
+        </View>
+        
+
+        <FormLabel> <Text style={styles.titleText}>UPDATE ADDITIONAL INFORMATION </Text> </FormLabel>
+        
+        <FormInput
+          inputStyle={styles.formContainter}
+          multiline
+          numberOfLines ={5}
+          maxLength ={300}
+          autoCorrect={false}
+          underLineColorAndroid="white"
+          placeholder="Tap To Add Additional Information"
+          value={this.state.comment}
+          onChangeText={(text) => this.setState({comment:text})}
+          />
+
+
+        <Button
+          title= "SUBMIT"
+          buttonStyle={styles.buttonContainer}
+          textStyle={styles.titleText}
+
+           onPress={() =>{
+            this.forceUpdate() ;
+             additionalText= this.state.comment;
+             this.forceUpdate() ;
+             this.setState({comment:''})
+              
+
+
+              }}
+              
+
+
+          /*     this.setState({promptVisible:true})}}>
+              Open prompt  */
+          
+              />
+          
+
+          
+          
+          
+           
+
+         
+
+ {/*           <Prompt
+            title="Add Additional Information"
+            placeholder="Start Typing"
+            visible={this.state.promptVisible}
+            onCancel={() => this.setState({ 
+              promptVisible: false,
+              message: "You Cancelled"
+
+            })}
+            onSubmit={(value) => this.setState({promptVisible:false, message: 'You said "${value}"' })}
+            
+            />     */}
+
+ 
+        </ScrollView> 
+        
+
       </View>
+
+
+
     );
+    
   }
+
+    
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -112,7 +241,7 @@ const styles = StyleSheet.create({
   headerText: {
     textAlign: 'center',
     color: colorScheme.quaternaryTextColor,
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
   },
   infoContainer: {
@@ -131,7 +260,37 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: colorScheme.quaternaryTextColor,
   },
+
+  buttonContainer: {
+    borderWidth: 1,
+    borderRadius: 10,
+    flex: 3,
+   
+    backgroundColor: colorScheme.actualColor,
+    borderColor: colorScheme.actualColor,
+  },
+
+  formContainter: {
+    borderWidth: 1,
+    borderRadius: 10,
+    flex: 3,
+   
+    backgroundColor: colorScheme.primaryContainerColor,
+  },
+
+  
+
+  
+
+
+  titleText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: colorScheme.quaternaryTextColor,
+  },
 })
+
 
 function mapStateToProps(state) {
     return {
@@ -141,6 +300,8 @@ function mapStateToProps(state) {
     }
 }
 
+
 export default connect(mapStateToProps, {
     fetchVesselFromIMO,
 })(VesselInfo);
+
