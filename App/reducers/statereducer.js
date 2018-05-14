@@ -4,7 +4,31 @@ import stateCatalogue from './state_catalogue.json';
 
 const INITIAL_STATE = { 
   stateCatalogue: stateCatalogue,
-  favoriteStates: [],
+  favoriteStates: ['Anchoring_Commenced', 'Anchoring_Completed'
+, 'AnchoringOp_Requested', 'AnchoringOp_ReqReceived', 
+'AnchoringOp_Confirmed', 'AnchoringOp_Denied', 'AnchoringOp_Cancelled',
+'Arrival_Vessel_Berth', 'Arrival_Vessel_AnchorageArea', 
+'Arrival_Vessel_LOC', 'Arrival_Vessel_ETugZone', 'Arrival_Vessel_PilotBA',
+'Arrival_Vessel_PortArea', 'Arrival_Vessel_TrafficArea', 
+'Arrival_Vessel_RendezvArea', 'Arrival_Vessel_TugZone', 
+'BerthShifting_Commenced', 'BerthShifting_Completed', 'BerthShifting_Requested',
+'Bunkering_Requested', 'CargoOp_Requested', 'DepartureAnchoringOp_Commenced',
+'DepartureAnchoringOp_Completed', 'DepartureAnchoringOp_Confirmed', 
+'DepartureAnchoringOp_Denied', 'DepartureAnchoringOp_Requested', 
+'DepartureAnchoringOp_Cancelled', 'Departure_Vessel_Berth', 
+'Departure_Vessel_AnchorageArea', 'Departure_Vessel_TugZone', 
+'Departure_Vessel_ETugZone', 'Departure_Vessel_PilotBA', 
+'Departure_Vessel_TrafficArea', 'Departure_Vessel_PortArea',
+'Departure_Vessel_RendezvArea', 'Departure_Vessel_LOC',
+'EscortTowage_Requested', 'Forklift_Requested', 'Gangway_Requested',
+'GarbageOp_Requested', 'IceBreaking_Requested', 'LoadingOp_Requested',
+'LubeOil_Requested', 'MooringOp_Requested', 'Pilotage_Requested', 
+'PortVisit_Requested', 'PostCargoSurvey_Confirmed', 'PreCargoSurvey_Requested',
+'Provision_Requested', 'ReadyToSailOp_Commenced', 'ReadyToSailOp_Completed',
+'Security_Requested', 'SlopOp_Requested', 'SludgeOp_Requested', 
+'Tours_Requested', 'Towage_Requested', 'UnMooringOp_Requested',
+'UnloadingOp_Requested', 'VTSAreaDepart_Requested', 'VTSAreaEntry_Requested',
+'WaterOp_Requested'],
   stateById: function(id) {
     return this.stateCatalogue.find(stateDef => stateDef.StateId === id);
   },
