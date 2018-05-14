@@ -22,6 +22,8 @@ import { selectBerthLocation } from '../../actions';
 import TopHeader from '../top-header-view';
 import colorScheme from '../../config/colors';
 
+
+
 class LocationSelection extends Component {
     state = {
         searchTerm: '',
@@ -50,9 +52,21 @@ class LocationSelection extends Component {
         return 0;
     }
 
+  
+    sortTest(a,b) {
+        
+        if(a.name < b.name) return -1;
+        if(a.name > b.name) return 1;
+        return 0;
+    } 
+
+    
+     
+
     search(locations, searchTerm) {
-        return locations.filter(location => location.name.toUpperCase().includes(searchTerm.toUpperCase())).sort((a, b) => this.sortRecentlyUsed(a, b));
+        return locations.filter(location => location.name.toUpperCase().includes(searchTerm.toUpperCase())).sort((a, b) => this.sortRecentlyUsed(a, b)).sort((a,b)=>this.sortTest(a,b));
     }
+   
 
     render() {
         const { selectLocationFor, selectLocation, navigation, onBackPress, locations } = this.props;
