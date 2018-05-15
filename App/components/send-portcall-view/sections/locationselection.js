@@ -51,8 +51,14 @@ class LocationSelection extends Component {
         return 0;
     }
 
+    sortAlphabetically(a,b) {
+        if(a.LocationSelection < b.LocationSelection || a.name < b.name) return -1;
+        if(a.LocationSelection > b.LocationSelection || a.name > b.name) return 1;
+        return 0; 
+    }
+
     search(locations, searchTerm) {
-        return locations.filter(location => location.name.toUpperCase().includes(searchTerm.toUpperCase())).sort((a, b) => this.sortRecentlyUsed(a, b));
+        return locations.filter(location => location.name.toUpperCase().includes(searchTerm.toUpperCase())).sort((a, b) => this.sortRecentlyUsed(a, b)).sort((a,b) => this.sortAlphabetically(a,b));
     }
 
     render() {

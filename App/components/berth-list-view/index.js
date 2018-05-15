@@ -60,9 +60,6 @@ class LocationSelection extends Component {
         return 0;
     } 
 
-    
-     
-
     search(locations, searchTerm) {
         return locations.filter(location => location.name.toUpperCase().includes(searchTerm.toUpperCase())).sort((a, b) => this.sortRecentlyUsed(a, b)).sort((a,b)=>this.sortTest(a,b));
     }
