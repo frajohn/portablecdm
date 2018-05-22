@@ -117,7 +117,7 @@ class PortCallList extends Component {
                     /> */}
 
                     
-                    <Button
+                    {/* <Button
                         containerViewStyle={styles.buttonContainer}
                         small
                         icon={{
@@ -128,7 +128,7 @@ class PortCallList extends Component {
                         }}
                         backgroundColor = {colorScheme.primaryColor}
                         onPress= {() => navigate('FilterMenu')}
-                    />
+                    /> */}
                 </View>
 
                 {/*Render the List of PortCalls*/}
@@ -196,6 +196,28 @@ class PortCallList extends Component {
                             ))
                         }
                     </List>
+                    
+                    <Button title= "Add New Portcall"
+                         buttonStyle={styles.buttonContainer1}
+                         textStyle={styles.titleText}
+
+                         onPress={() => {
+                            // if (activeItemKey !== 'StateList') {
+                                // Only to pass params to the children of the stack navigator
+                                navigate('FavoriteStatesInit', {}, {
+                                    type: "Navigation/NAVIGATE",
+                                    routeName: "FavoriteStatesInit",
+                                    params: { initNew: true }
+                                  });
+                            }
+                        }
+              
+
+
+          /*     this.setState({promptVisible:true})}}>
+              Open prompt  */
+          
+              />
                 </ScrollView>
             </View>
         )
@@ -302,12 +324,12 @@ const styles = StyleSheet.create({
         borderTopWidth: 0,
     },
     // Filter button container
-    buttonContainer: {
-        flex: 1,
-        marginRight: 0,
-        marginLeft: 0,
-        alignSelf: 'stretch',
-    },
+    // buttonContainer: {
+       // flex: 1,
+        //marginRight: 0,
+        //marginLeft: 0,
+       // alignSelf: 'stretch',
+    //},
     iconStyle: {
         alignSelf: 'stretch',
     },
@@ -317,6 +339,15 @@ const styles = StyleSheet.create({
     subTitleStyle: {
         color: colorScheme.tertiaryTextColor,
     },
+
+    buttonContainer1: {
+        borderWidth: 1,
+        borderRadius: 10,
+        flex: 3,
+       
+        backgroundColor: colorScheme.actualColor,
+        borderColor: colorScheme.actualColor,
+      },
 })
 
 function mapStateToProps(state) {

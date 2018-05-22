@@ -166,7 +166,7 @@ class SendPortcall extends Component {
     const { selectedDate, selectedTimeType, comment } = this.state;
     const { portCall, getState, initPortCall, sendingState, navigation, clearVesselResult } = this.props;
     const { navigate } = navigation;
-    const { selectedVessel } = this.state;
+    const { selectedVessel } = this.props;
     const vesselId = selectedVessel.imo;
     const { atLocation, fromLocation, toLocation, } = sendingState;
     const state = getState(stateId);
@@ -289,12 +289,15 @@ class SendPortcall extends Component {
           {/* PART OF INITIALIZATION */}
         {initializeNew &&
         <View>
-            <View style={styles.pickerTextContainer}>
-                <Text style={styles.pickerTextStyle}>Select vessel</Text>
-            </View>
+          <View style={styles.headerContainerVessel}>
+          <Text style={styles.headerTextVessel}>{this.props.selectedVessel.name}</Text>
+          </View>
+            {/* <View style={styles.pickerTextContainer}> */}
+                
+            {/* </View> */}
             <View style={styles.pickerContainer}>
                 <View style={styles.rowContainer}>
-                <SearchBar
+                {/* <SearchBar
                 autoCorrect={false} 
                 containerStyle = {styles.searchBarContainer}
                 clearIcon
@@ -304,8 +307,8 @@ class SendPortcall extends Component {
                 placeholderTextColor = {colorScheme.tertiaryTextColor}
                 onChangeText={text => this.setState({newVessel: text, selectedVessel: ''})}
                 textInputRef='textInput'
-                />
-                <Button
+                /> */}
+                {/* <Button
                 containerViewStyle={styles.buttonContainer}
                 small
                 title="Search"
@@ -342,7 +345,7 @@ class SendPortcall extends Component {
                             });
                         }
                     }
-                />
+                /> */}
                 </View>
             </View>
         </View>
@@ -521,11 +524,30 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colorScheme.backgroundColor
   },
+  headerContainerVessel: {
+    backgroundColor: colorScheme.primaryContainerColor,
+    paddingTop: 10,
+    paddingBottom: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 5,
+  },
+  headerTextVessel: {
+    textAlign: 'center',
+    color: colorScheme.quaternaryTextColor,
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
   headerContainer: {
     backgroundColor: colorScheme.primaryColor,
     alignItems: 'center',
     flexDirection: 'column',
     },
+    headerTitleText1: {
+      textAlign: 'center',
+      color: colorScheme.primaryTextColor,
+      fontSize: 24,
+     },
   headerTitleText: {
     textAlign: 'center',
     color: colorScheme.secondaryContainerColor,
@@ -732,6 +754,7 @@ function mapStateToProps(state) {
     newVessel: state.vessel.vessel,
     error: state.error,
     instanceInfo: state.settings.instance,
+    selectedVessel: state.portCalls.vessel,
   }
 }
 

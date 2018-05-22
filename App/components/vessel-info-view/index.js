@@ -201,9 +201,11 @@ class VesselInfo extends Component {
             onSubmit={(value) => this.setState({promptVisible:false, message: 'You said "${value}"' })}
             
             />     */}
-
+          <View style={{height: 282}}/>
  
         </ScrollView> 
+        
+        
         
 
       </View>
@@ -278,10 +280,6 @@ const styles = StyleSheet.create({
     backgroundColor: colorScheme.primaryContainerColor,
   },
 
-  
-
-  
-
 
   titleText: {
     textAlign: 'center',
@@ -289,6 +287,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: colorScheme.quaternaryTextColor,
   },
+  
+  
+  
 })
 
 
