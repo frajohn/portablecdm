@@ -35,7 +35,7 @@ import {
 
 import ships from '../../assets/ships';
 
-var additionalText ='No additional information about the vessel has been submitted';
+var additionalText ='';
 
 
 
@@ -132,8 +132,6 @@ class VesselInfo extends Component {
 
 
 
-
-
           
 
         <View style={styles.infoContainer}>
@@ -154,10 +152,10 @@ class VesselInfo extends Component {
           autoCorrect={false}
           underLineColorAndroid="white"
           placeholder="Tap To Add Additional Information"
-          value={this.state.comment}
+          //value={this.state.comment}
+          defaultValue= {additionalText}
           onChangeText={(text) => this.setState({comment:text})}
           />
-
 
         <Button
           title= "SUBMIT"
